@@ -22,25 +22,20 @@ let seedStrokes = [];
 let canvas;
 
 function setup() {
-  canvas = createCanvas(640, 480);
+  canvas = createCanvas(800, 600);
   // Hide the canvas until the model is ready
   canvas.hide();
 
   background(220);
+
+  //store the selected model
+  let newModel = document.getElementById('newmodel').value;
+  // See a list of all supported models: https://github.com/ml5js/ml5-library/blob/master/src/SketchRNN/models.js
+  model = ml5.sketchRNN(newModel, modelReady);
+
   // Button to clear drawing
   let clearButton = select('#clear');
   clearButton.mousePressed(clearDrawing);
-  //Button to load the model
-  let loadButton = select('#loadModel')
-  loadButton.mousePressed(loadModel)
-}
-
-function loadModel(){
-  // Load the model
-  let newModel
-  newModel = document.getElementById('#newModel').value;
-  // See a list of all supported models: https://github.com/ml5js/ml5-library/blob/master/src/SketchRNN/models.js
-  model = ml5.sketchRNN(newModel, modelReady);
 }
 
 // The model is ready
